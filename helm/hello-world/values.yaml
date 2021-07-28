@@ -1,0 +1,33 @@
+# Default values for ekoparty-flask-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: tty0/flask_app
+  pullPolicy: Always
+  tag: "1.1"
+
+service:
+  type: ClusterIP
+  port: 8000
+
+limits:
+  cpu: 0.2
+  memory: 128Mi
+requests:
+  cpu: 0.4
+  memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+conf:
+  salute: "Hello World!"
+  header: "https://www.latercera.com/resizer/uov4RO7_c7r9wId6b8gnAe6TmXc=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/JQNDKHIRSFEDZM5FREIFQJLGDA.jpg"
+
