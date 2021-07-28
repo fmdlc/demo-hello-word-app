@@ -20,8 +20,7 @@ metadata:
 spec:
   tls:
     - hosts:
-      - hello-app.tty0.guru
-      - email.tty0.guru
+      - hello.tty0.guru
       secretName: hello-world-secret
   rules:
   - host: "hello.tty0.guru"
@@ -31,6 +30,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: ekoparty-hello-app
+            name: hello-world-ekoparty-flask-app
             port:
               number: 8000
