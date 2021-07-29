@@ -2,34 +2,36 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "hello-ingress"
+  name: {{ .Values.ingress.hostname }}
   annotations:
-    cert-manager.io/issuer: letsencrypt-prod
-    certmanager.k8s.io/acme-challenge-type: http01
-    external-dns.alpha.kubernetes.io/hostname: tty0.guru
-    external-dns.alpha.kubernetes.io/ttl: "120"
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: PUT, GET, POST, OPTIONS
-    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
-    nginx.ingress.kubernetes.io/default-backend: nginx
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-  name: hello
-  namespace: default
+    {{- if eq .Values.ingress.certManager.enabled true }}
+    cert-manager.io/issuer: {{ .Values.ingress.certManager.issuer }}
+    certmanager.k8s.io/acme-challenge-type: {{ .Values.ingress.certManager.acmeChallenge | default "http01" }}
+    {{- end }}
+    {{- if eq .Values.ingress.dnsController.enabled true }}
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.dnsController.hostname }}
+    external-dns.alpha.kubernetes.io/ttl: {{ .Values.ingress.dnsController.ttl | default "120" }}
+    {{- end }}
+    kubernetes.io/ingress.class: {{ .Values.ingress.class | default "nginx" }}
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  labels:
+    {{- include "ekoparty-flask-app.selectorLabels" . | nindent 4 }}
+  namespace: {{ .Values.namespace | default "default" }}
 spec:
   tls:
     - hosts:
-      - hello.tty0.guru
-      secretName: hello-world-secret
+      - {{ .Values.ingress.hostname }}
+      secretName: {{ .Values.ingress.hostname }}-secret
   rules:
-  - host: "hello.tty0.guru"
+  - host: {{ .Values.ingress.hostname | quote }}
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: {{ .Values.ingress.path | default "/" }}
         backend:
           service:
-            name: hello-world-ekoparty-flask-app
+            name: {{ include "ekoparty-flask-app.fullname" . }}
             port:
-              number: 8000
+              number: {{ .Values.service.port }}
