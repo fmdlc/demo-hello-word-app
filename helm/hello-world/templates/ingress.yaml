@@ -9,8 +9,8 @@ metadata:
     certmanager.k8s.io/acme-challenge-type: {{ .Values.ingress.certManager.acmeChallenge | default "http01" }}
     {{- end }}
     {{- if eq .Values.ingress.dnsController.enabled true }}
-    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.dnsController.hostname }}
-    external-dns.alpha.kubernetes.io/ttl: {{ .Values.ingress.dnsController.ttl | default "120" }}
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.dnsController.hostname | quote }}
+    external-dns.alpha.kubernetes.io/ttl: {{ .Values.ingress.dnsController.ttl | quote }}
     {{- end }}
     kubernetes.io/ingress.class: {{ .Values.ingress.class | default "nginx" }}
     {{- range $key, $value := .Values.ingress.annotations }}
@@ -23,7 +23,7 @@ spec:
   tls:
     - hosts:
       - {{ .Values.ingress.hostname }}
-      secretName: {{ .Values.ingress.hostname }}-secret
+      secretName: {{ include "ekoparty-flask-app.fullname" . }}
   rules:
   - host: {{ .Values.ingress.hostname | quote }}
     http:

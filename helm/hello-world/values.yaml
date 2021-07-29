@@ -30,13 +30,13 @@ autoscaling:
   targetMemoryUtilizationPercentage: 80
 
 ingress:
-  hostname: hello-world.tty0.guru
-  class: nginx
+  hostname: "hello-word.tty0.guru"
+  class: "nginx"
   path: "/"
   dnsController:
     enabled: true
     hostname: tty0.guru
-    ttl: "120"
+    ttl: 120
   certManager:
     enabled: true
     issuer: "letsencrypt-prod"
@@ -45,7 +45,7 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/default-backend: "nginx"
     nginx.ingress.kubernetes.io/enable-cors: "true"
 
