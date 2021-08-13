@@ -30,7 +30,7 @@ autoscaling:
   targetMemoryUtilizationPercentage: 80
 
 ingress:
-  hostname: "hello-word.tty0.guru"
+  hostname: "hello-world.tty0.guru"
   class: "nginx"
   path: "/"
   dnsController:
