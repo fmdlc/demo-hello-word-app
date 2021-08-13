@@ -50,6 +50,6 @@ ingress:
     nginx.ingress.kubernetes.io/enable-cors: "true"
 
 conf:
-  salute: "Hello World!"
-  header: "https://www.latercera.com/resizer/uov4RO7_c7r9wId6b8gnAe6TmXc=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/JQNDKHIRSFEDZM5FREIFQJLGDA.jpg"
+  salute: "Control Is An Illusion"
+  header: "https://heraldodemexico.com.mx/u/fotografias/m/2021/5/12/f960x540-369933_444008_0.jpg"
 
