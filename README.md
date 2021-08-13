@@ -1,7 +1,4 @@
-![https://media-exp1.licdn.com/dms/image/C4E1BAQF0-zKgjLFxiQ/company-background_10000/0?e=2159024400&v=beta&t=B1JsIFyearEmYZXtVxOjb-cKBSMB-jrdtmO7MKZH1Ls](https://media-exp1.licdn.com/dms/image/C4E1BAQF0-zKgjLFxiQ/company-background_10000/0?e=2159024400&v=beta&t=B1JsIFyearEmYZXtVxOjb-cKBSMB-jrdtmO7MKZH1Ls)
-
 # hello-world-app
-![ekoparty-hello-world-app](https://github.com/fmdlc/hello-world-app/workflows/hello-world-app/badge.svg)
 
 Basic `Python 3.8` Flask application to run in a Kubernetes cluster.
 
