@@ -50,6 +50,6 @@ ingress:
     nginx.ingress.kubernetes.io/enable-cors: "true"
 
 conf:
-  salute: "Control Is An Illusion - for Telegram"
+  salute: "Control Is An Illusion"
   header: "https://heraldodemexico.com.mx/u/fotografias/m/2021/5/12/f960x540-369933_444008_0.jpg"
 
